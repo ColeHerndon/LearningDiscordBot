@@ -197,6 +197,88 @@ client.on('message', (message) =>
                 message.channel.send('ERROR: Neither of us have the `banMembers` permission!');
             }
         }
+
+        //Kick command. Kicks user, simple.
+        if (message.content.startsWith (modPrefix + 'kick'))
+        {
+            let userHasKickPerms = message.channel.permissionsFor(message.member).has('KICK_MEMBERS');
+            let botHasKickPerms = message.channel.permissionsFor(config.lambbotID).has('KICK_MEMBERS');
+            var userToKick = message.toString();
+            var kickedUsersIDArray = [];
+
+            for (var x1 = 0; x1 < userToKick.length; x1++)
+            {
+                if (userToKick.charAt(x1) == '1' || userToKick.charAt(x1) == '2' || userToKick.charAt(x1) == '3' || userToKick.charAt(x1) == '4' || userToKick.charAt(x1) == '5'
+                      || userToKick.charAt(x1) == '6' || userToKick.charAt(x1) == '7' || userToKick.charAt(x1) == '8' || userToKick.charAt(x1) == '9' || userToKick.charAt(x1) == '0')
+                {
+                    var idString = '';
+                    var y = x1;
+                    while (userToKick.charAt(y) == '1' || userToKick.charAt(y) == '2' || userToKick.charAt(y) == '3' || userToKick.charAt(y) == '4' || userToKick.charAt(y) == '5'
+                          || userToKick.charAt(y) == '6' || userToKick.charAt(y) == '7' || userToKick.charAt(y) == '8' || userToKick.charAt(y) == '9' || userToKick.charAt(y) == '0')
+                    {
+                        idString = idString + userToKick.charAt(y);
+                        y++;
+                    }
+
+                    if (idString.length == 18)
+                    {
+                        kickedUsersIDArray.push(idString);
+                    }
+                }
+            }
+
+            console.log('Kick IDs:')
+
+            if (kickedUsersIDArray.length == 0)
+            {
+                console.log('no ids entered.');
+                console.log('');
+            }
+            else
+            {
+                for (var x2 = 0; x2 < kickedUsersIDArray.length; x2++)
+                {
+                    console.log(kickedUsersIDArray[x2]);
+                  }
+            }
+
+            if (userHasKickPerms == true && botHasKickPerms == true)
+            {
+                if (kickedUsersIDArray.length == 0)
+                {
+                    return;
+                }
+                if (kickedUsersIDArray.length == 1)
+                {
+                    try
+                    {
+                      message.channel.send('Just a kick huh? Ok!');
+                      message.guild.member(kickedUsersIDArray[0]).kick();
+                      message.channel.send('`Kicked <@' + kickedUsersIDArray[0] + '>`');
+                    }
+                    catch (e)
+                    {
+                        console.log(error);
+                    }
+                }
+                if (kickedUsersIDArray.length >  1)
+                {
+                    return;
+                }
+            }
+            else if (userHasKickPerms == true && botHasKickPerms == false)
+            {
+                message.channel.send('ERROR: You have the `kickMembers` permission, but I don\'t!');
+            }
+            else if (userHasKickPerms == false && botHasKickPerms == true)
+            {
+                message.channel.send('ERROR: I have the `kickMembers` permission, but you don\'t!');
+            }
+            else if (userHasKickPerms == false && botHasKickPerms == false)
+            {
+                message.channel.send('ERROR: Neither of us have the `kickMembers` permission!');
+            }
+        }
     }
   });
 
