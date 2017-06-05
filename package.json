@@ -1,0 +1,28 @@
+{
+  "name": "lambbot",
+  "version": "1.0.0",
+  "description": "discord bot, first testing bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ColeHerndon/LambBot.git"
+  },
+  "keywords": [
+    "discord",
+    "bot"
+  ],
+  "author": "Cole Herndon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ColeHerndon/LambBot/issues"
+  },
+  "homepage": "https://github.com/ColeHerndon/LambBot#readme",
+  "dependencies": {
+    "discord.js": "^11.1.0",
+    "libsodium-wrappers": "^0.5.1",
+    "uws": "^0.14.5"
+  }
+}
