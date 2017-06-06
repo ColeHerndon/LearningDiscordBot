@@ -153,33 +153,19 @@ client.on('message', (message) =>
                 }
                 if (bannedUsersIDArray.length == 1)
                 {
-                    try
-                    {
-                      message.channel.send('Only one onee-chan? Guess it\'s my job...');
-                      message.guild.member(bannedUsersIDArray[0]).ban();
-                      message.channel.send('`Banned <@' + bannedUsersIDArray[0] + '>`');
-                    }
-                    catch (e)
-                    {
-                        console.log(e);
-                    }
+                    message.channel.send('Only one onee-chan? Guess it\'s my job...');
+                    message.guild.member(bannedUsersIDArray[0]).ban();
+                    message.channel.send('`Banned` <@' + bannedUsersIDArray[0] + '>');
                 }
                 if (bannedUsersIDArray.length >  1)
                 {
-                    try
+                    message.channel.send('Wow! A whole list for me? You\'re too sweet!');
+                    for (var x3 = 0; x3 < bannedUsersIDArray.length; x3++)
                     {
-                        message.channel.send('Wow! A whole list for me? You\'re too sweet!');
-                        for (var x3 = 0; x3 < bannedUsersIDArray.length; x3++)
-                        {
-                            message.guild.member(bannedUsersIDArray[x3]).ban();
-                            message.channel.send('`Banned <@' + bannedUsersIDArray[x3] + '>`');
-                        }
-                        message.channel.send('I don\'t know of a better feeling than banning ' + bannedUsersIDArray.length + ' users, do you?');
+                        message.guild.member(bannedUsersIDArray[x3]).ban();
+                        message.channel.send('`Banned` <@' + bannedUsersIDArray[x3] + '>');
                     }
-                    catch (e)
-                    {
-                        console.log(e);
-                    }
+                    message.channel.send('I don\'t know of a better feeling than banning ' + bannedUsersIDArray.length + ' users, do you?');
                 }
             }
             else if (userHasBanPerms == true && botHasBanPerms == false)
@@ -233,33 +219,19 @@ client.on('message', (message) =>
                 }
                 if (kickedUsersIDArray.length == 1)
                 {
-                    try
-                    {
-                        message.channel.send('Lambbot is my name, kicking users is my game!');
-                        message.guild.member(kickedUsersIDArray[0]).kick();
-                        message.channel.send('`Kicked <@' + kickedUsersIDArray[0] + '>`');
-                    }
-                    catch (e)
-                    {
-                        console.log(e);
-                    }
+                    message.channel.send('Lambbot is my name, kicking users is my game!');
+                    message.guild.member(kickedUsersIDArray[0]).kick();
+                    message.channel.send('`Kicked` <@' + kickedUsersIDArray[0] + '>');
                 }
                 if (kickedUsersIDArray.length >  1)
                 {
-                    try
+                    message.channel.send('I\'m kicking all these people? I mean, ok!');
+                    for (var x3 = 0; x3 < kickedUsersIDArray.length; x3++)
                     {
-                        message.channel.send('I\'m kicking all these people? I mean, ok!');
-                        for (var x3 = 0; x3 < kickedUsersIDArray.length; x3++)
-                        {
-                            message.guild.member(kickedUsersIDArray[x3]).kick();
-                            message.channel.send('`Kicked <@' + kickedUsersIDArray[x3] + '>`');
-                        }
-                        message.channel.send('Kicked ' + kickedUsersIDArray.length + ' users! It is my job you know? ¯\_(ツ)_/¯');
+                        message.guild.member(kickedUsersIDArray[x3]).kick();
+                        message.channel.send('`Kicked` <@' + kickedUsersIDArray[x3] + '>');
                     }
-                    catch (e)
-                    {
-                        console.log(e);
-                    }
+                    message.channel.send('Kicked ' + kickedUsersIDArray.length + ' users! It is my job you know? ¯\_(ツ)_/¯');
                 }
             }
             else if (userHasKickPerms == true && botHasKickPerms == false)
