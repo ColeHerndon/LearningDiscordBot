@@ -145,26 +145,11 @@ client.on('message', (message) =>
                 }
             }
 
-            console.log('Ban IDs:')
-
-            if (bannedUsersIDArray.length == 0)
-            {
-                console.log('no ids entered.');
-                console.log('');
-            }
-            else
-            {
-                for (var x2 = 0; x2 < bannedUsersIDArray.length; x2++)
-                {
-                    console.log(bannedUsersIDArray[x2]);
-                  }
-            }
-
             if (userHasBanPerms == true && botHasBanPerms == true)
             {
                 if (bannedUsersIDArray.length == 0)
                 {
-                    return;
+                    message.channel.send('If you want me to ban someone, please mention a `user` or post a `id` next time!');
                 }
                 if (bannedUsersIDArray.length == 1)
                 {
@@ -176,12 +161,25 @@ client.on('message', (message) =>
                     }
                     catch (e)
                     {
-                        console.log(error);
+                        console.log(e);
                     }
                 }
                 if (bannedUsersIDArray.length >  1)
                 {
-                    k
+                    try
+                    {
+                        message.channel.send('Wow! A whole list for me? You\'re too sweet!');
+                        for (var x3 = 0; x3 < bannedUsersIDArray.length; x3++)
+                        {
+                            message.guild.member(bannedUsersIDArray[x3]).ban();
+                            message.channel.send('`Banned <@' + bannedUsersIDArray[x3] + '>`');
+                        }
+                        message.channel.send('I don\'t know of a better feeling than banning ' + bannedUsersIDArray.length + ' users, do you?');
+                    }
+                    catch (e)
+                    {
+                        console.log(e);
+                    }
                 }
             }
             else if (userHasBanPerms == true && botHasBanPerms == false)
@@ -227,43 +225,41 @@ client.on('message', (message) =>
                 }
             }
 
-            console.log('Kick IDs:')
-
-            if (kickedUsersIDArray.length == 0)
-            {
-                console.log('no ids entered.');
-                console.log('');
-            }
-            else
-            {
-                for (var x2 = 0; x2 < kickedUsersIDArray.length; x2++)
-                {
-                    console.log(kickedUsersIDArray[x2]);
-                  }
-            }
-
             if (userHasKickPerms == true && botHasKickPerms == true)
             {
                 if (kickedUsersIDArray.length == 0)
                 {
-                    return;
+                    message.channel.send('If you want me to kick someone, please mention a `user` or post a `id` next time!');
                 }
                 if (kickedUsersIDArray.length == 1)
                 {
                     try
                     {
-                      message.channel.send('Just a kick huh? Ok!');
-                      message.guild.member(kickedUsersIDArray[0]).kick();
-                      message.channel.send('`Kicked <@' + kickedUsersIDArray[0] + '>`');
+                        message.channel.send('Lambbot is my name, kicking users is my game!');
+                        message.guild.member(kickedUsersIDArray[0]).kick();
+                        message.channel.send('`Kicked <@' + kickedUsersIDArray[0] + '>`');
                     }
                     catch (e)
                     {
-                        console.log(error);
+                        console.log(e);
                     }
                 }
                 if (kickedUsersIDArray.length >  1)
                 {
-                    return;
+                    try
+                    {
+                        message.channel.send('I\'m kicking all these people? I mean, ok!');
+                        for (var x3 = 0; x3 < kickedUsersIDArray.length; x3++)
+                        {
+                            message.guild.member(kickedUsersIDArray[x3]).kick();
+                            message.channel.send('`Kicked <@' + kickedUsersIDArray[x3] + '>`');
+                        }
+                        message.channel.send('Kicked ' + kickedUsersIDArray.length + ' users! It is my job you know? ¯\_(ツ)_/¯');
+                    }
+                    catch (e)
+                    {
+                        console.log(e);
+                    }
                 }
             }
             else if (userHasKickPerms == true && botHasKickPerms == false)
@@ -288,7 +284,6 @@ client.on('message', (message) =>
     //Check for bot pinged.
     if (message.isMentioned(config.lambbotID))
     {
-        console.log('bot mentioned');
         message.channel.send('Oi, why are you pinging me ' + message.author + '?');
       }
 });
